@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <link rel="stylesheet" href="styles.css">
+ 
+</head>
+<body>  
+  <div class="advice-card" id="card">    
+      <h3 class="advice-card__title">Advice #{{adviceId}}</h3>
+      <p class="advice-card__text">{{generatedText}}</p>
+      <img class="advice-card__divider" src="/images/pattern-divider-desktop.svg" alt="">
+      <button @click="generateAdvice" class="advice-card__dice-btn">
+        <img src="/images/icon-dice.svg" alt="Get new advice">
+      </button>   
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    const { createApp, ref } = Vue    
+
+    createApp({
+      setup() {
+        const generatedText = ref('')
+        const adviceId = ref(null)
+        const api = axios.create({
+          baseURL:'https://api.adviceslip.com',
+          headers: {
+           
+             'Accept': 'application/json', 
+          }
+        })
+
+        function generateAdvice() {
+          api.get('/advice')
+            .then(function (response) {
+               console.log(response);
+              const {id, advice} = response.data.slip;
+
+              adviceId.value = id;
+              generatedText.value = advice
+            })
+            .catch(function (error) {
+              // handle error
+              console.log(error);
+            })
+            .finally(function () {
+              // always executed
+            });
+        }
+
+        return {
+          generatedText,
+          adviceId,
+          generateAdvice
+        }
+      }
+    }).mount('#card')
+  </script>
+</body>
+</html>

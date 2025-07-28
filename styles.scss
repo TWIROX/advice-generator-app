@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;800&display=swap');
+
+$card-width-mobile: 320px;
+$card-width-desktop: 500px;
+$card-padding: 16px;
+$card-padding-desktop: 24px;
+$card-border-radius: 12px;
+$card-background-color: hsl(217, 19%, 24%);
+
+$primary-blue-color:  hsl(193, 38%, 86%);
+$primary-green-color:  hsl(150, 100%, 66%);
+
+$background-color: hsl(218, 23%, 16%);
+
+$button-width: 56px;
+$button-height: 56px;
+
+$primary-font: 'Manrope', sans-serif;
+$font-size-text: 28px;
+
+body {
+    margin: 0;
+    padding: 24px;
+    min-height: 100vh;
+    width: 100vw; 
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    
+    background-color: $background-color; 
+
+    @media (max-width: 767px) {
+            padding: 16px; 
+}
+}
+.advice-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    min-height: 300px;
+    width: $card-width-desktop;
+    padding: $card-padding-desktop;
+    border-radius: $card-border-radius;
+    background-color: $card-background-color;
+    
+
+    @media (max-width: 767px) {
+            width: $card-width-mobile;
+            padding: $card-padding;            
+        }
+
+    &__title {
+        color: $primary-green-color;
+        display: flex;            
+        justify-content: center;
+        font-family: $primary-font;
+    }
+
+    &__text {
+        display: flex;        
+        justify-content: center;
+        color: $primary-blue-color;
+        font-size: $font-size-text;
+        font-family: $primary-font;
+        text-align: center;
+    }
+
+    &__divider{
+        margin-bottom: 24px
+    }
+
+    &__dice-btn {
+        display: flex;
+        justify-content: center; // Centers horizontally
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -28px;        
+        width: $button-width;
+        height: $button-height;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: $primary-green-color;
+        box-shadow: none;
+        transition: box-shadow 0.7s ease-out, transform 0.3s ease-out;
+
+        &:active {
+            box-shadow: $primary-green-color 0 0 40px 15px;
+            transition: box-shadow 0.05s ease-in, transform 0.1s ease-in;
+        }
+    } 
+    
+}
+
+
